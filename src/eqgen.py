@@ -9,27 +9,25 @@ def complete_eq(formula: str) -> str:
     :param formula:
     :return:
     """
-    result = eval(formula)
-    return "".join([formula, "=", str(result), "#"])
+    result = (str(round(eval(formula), 5))).ljust(10, " ")
+    return "".join([formula, "=", result])
 
 
-def simple_eq(max_range: int = 100) -> str:
+def simple_eq() -> str:
     """
     generate simple equation with number in the
-    :param max_range: max range of the number in the formula (not the result)
     :return:
     """
     formula = "".join(
-        [
-            str(randint(1, max_range)),
-            operators[randint(0, 3)],
-            str(randint(1, max_range)),
-        ]
-    )
-
-    return complete_eq(formula)
+        [str(randint(0, 99)), operators[randint(0, 3)], str(randint(0, 99)),]
+    ).rjust(5, " ")
+    try:
+        result = complete_eq(formula)
+    except ZeroDivisionError:
+        result = simple_eq()
+    return result
 
 
 if __name__ == "__main__":
     for i in range(10):
-        print(simple_eq())
+        print(repr(simple_eq()))
