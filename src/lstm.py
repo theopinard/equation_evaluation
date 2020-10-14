@@ -35,8 +35,8 @@ dataset = tf.data.Dataset.from_tensor_slices(eq_as_index)
 
 
 def split_input_target(chunk):
-    input_text = chunk[:6]
-    target_text = chunk[6:]
+    input_text = chunk[:-1]
+    target_text = chunk[1:]
     return input_text, target_text
 
 
@@ -90,9 +90,9 @@ checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
 
 if __name__ == "__main__":
     print(dataset)
-    for input_example, target_example in dataset.take(1):
-        print("Input data: ", repr("".join(idx2char[input_example.numpy()])))
-        print("Target data:", repr("".join(idx2char[target_example.numpy()])))
+    for input_example, target_example in dataset.take(5):
+        print("Input data: ", repr("".join(idx2char[input_example.numpy()[0]])))
+        print("Target data:", repr("".join(idx2char[target_example.numpy()[0]])))
 
     print(dataset.take(1))
     for input_example_batch, target_example_batch in dataset.take(1):
@@ -108,4 +108,4 @@ if __name__ == "__main__":
     print("Input: \n", repr("".join(idx2char[input_example_batch][0])))
     print()
     print("Next Char Predictions: \n", repr("".join(idx2char[sampled_indices])))
-    # history = model.fit(dataset, epochs=EPOCHS, callbacks=[checkpoint_callback])
+    history = model.fit(dataset, epochs=EPOCHS, callbacks=[checkpoint_callback])
