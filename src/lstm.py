@@ -7,9 +7,9 @@ from eqgen import simple_eq
 vocab = "0123456789.+-*/= "
 
 TRAINING_EXAMPLE = 128
-BATCH_SIZE = 64
+BATCH_SIZE = 128
 BUFFER_SIZE = 10000
-EPOCHS = 10
+EPOCHS = 100
 
 
 # Length of the vocabulary in chars
