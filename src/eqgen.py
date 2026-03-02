@@ -9,8 +9,8 @@ def complete_eq(formula: str) -> str:
     :param formula:
     :return:
     """
-    result = (str(round(eval(formula), 5))).ljust(10, " ")
-    return "".join([formula, "=", result])
+    result = str(round(eval(formula), 5))
+    return "".join([formula, "=", result, "\n"])
 
 
 def simple_eq() -> str:
@@ -19,8 +19,8 @@ def simple_eq() -> str:
     :return:
     """
     formula = "".join(
-        [str(randint(0, 99)), operators[randint(0, 3)], str(randint(0, 99)),]
-    ).rjust(5, " ")
+        [str(randint(0, 9)), operators[randint(0, 3)], str(randint(0, 9)),]
+    )
     try:
         result = complete_eq(formula)
     except ZeroDivisionError:
